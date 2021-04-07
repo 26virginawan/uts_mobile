@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'models/item.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EntryForm extends StatefulWidget {
   final Item item;
@@ -48,7 +49,12 @@ class EntryFormState extends State<EntryForm> {
                 controller: nameController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orangeAccent),
+                    // borderRadius: BorderRadius.circular(25.7),
+                  ),
                   labelText: 'Nama Barang',
+                  labelStyle: TextStyle(color: Colors.black87),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -65,7 +71,12 @@ class EntryFormState extends State<EntryForm> {
                 controller: priceController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orangeAccent),
+                    // borderRadius: BorderRadius.circular(25.7),
+                  ),
                   labelText: 'Harga',
+                  labelStyle: TextStyle(color: Colors.black87),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -84,13 +95,12 @@ class EntryFormState extends State<EntryForm> {
 // tombol simpan
                   Expanded(
                     child: RaisedButton(
-                      color: Theme.of(context).primaryColorDark,
-                      textColor: Theme.of(context).primaryColorLight,
+                      color: Colors.orangeAccent,
                       child: Text(
                         'Save',
                         textScaleFactor: 1.5,
                         style: TextStyle(
-                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w600, color: Colors.white),
                       ),
                       onPressed: () {
                         if (item == null) {
@@ -113,14 +123,20 @@ class EntryFormState extends State<EntryForm> {
 // tombol batal
                   Expanded(
                     child: RaisedButton(
-                      color: Theme.of(context).primaryColorDark,
-                      textColor: Theme.of(context).primaryColorLight,
+                      color: Colors.white,
                       child: Text(
                         'Cancel',
                         textScaleFactor: 1.5,
                         style: TextStyle(
-                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            color: Colors.orangeAccent),
                       ),
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                        color: Colors.orangeAccent.withOpacity(0.2),
+                        width: 1,
+                      )),
                       onPressed: () {
                         Navigator.pop(context);
                       },

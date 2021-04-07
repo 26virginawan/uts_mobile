@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tokosepatu/DbHelper.dart';
 import 'package:tokosepatu/EntryForm.dart';
 import 'models/item.dart'; //pendukung program asinkron
@@ -16,6 +16,13 @@ class HomeState extends State<Home> {
   DbHelper dbHelper = DbHelper();
   int count = 0;
   List<Item> itemList;
+
+  @override
+  void initState() {
+    super.initState();
+    updateListView();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (itemList == null) {
@@ -48,7 +55,8 @@ class HomeState extends State<Home> {
           alignment: Alignment.topLeft,
           child: Text(
             "List Item",
-            style: TextStyle(fontSize: 27),
+            style:
+                GoogleFonts.poppins(fontSize: 27, fontWeight: FontWeight.w500),
           ),
         ),
         Expanded(child: createListView()),
@@ -59,7 +67,14 @@ class HomeState extends State<Home> {
             width: 250,
             height: 50,
             child: RaisedButton(
-              color: Colors.black38,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                side: BorderSide(
+                  color: Colors.grey.withOpacity(0.2),
+                  width: 1,
+                ),
+              ),
+              color: Colors.orangeAccent,
               onPressed: () async {
                 var item = await navigateToEntryForm(context, null);
                 if (item != null) {
@@ -76,12 +91,12 @@ class HomeState extends State<Home> {
                   Icon(
                     Icons.add,
                     color: Colors.white,
+                    size: 30,
                   ),
                   Text(
                     "tambahkan Item",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontSize: 17,
-                        fontFamily: 'Poppins',
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
@@ -112,8 +127,8 @@ class HomeState extends State<Home> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
               side: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-                width: 1,
+                color: Colors.orange.withOpacity(0.2),
+                width: 2,
               )),
           shadowColor: Colors.black38,
           elevation: 2.0,
@@ -121,18 +136,22 @@ class HomeState extends State<Home> {
             children: <Widget>[
               Flexible(
                 child: Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: EdgeInsets.only(
+                    left: 10,
+                    top: 20,
+                    bottom: 20,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Text(
                         this.itemList[index].name,
-                        style: TextStyle(
-                            fontSize: 27, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.poppins(
+                            fontSize: 23, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       Text(
                         "Rp : " + this.itemList[index].price.toString(),
@@ -142,14 +161,15 @@ class HomeState extends State<Home> {
                         height: 30,
                       ),
                       Container(
+                        margin: EdgeInsets.only(right: 80),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             GestureDetector(
                               child: Icon(
                                 Icons.edit,
                                 size: 37,
-                                color: Colors.black26,
+                                color: Colors.greenAccent,
                               ),
                               onTap: () async {
                                 var item = await navigateToEntryForm(
@@ -163,7 +183,7 @@ class HomeState extends State<Home> {
                               child: Icon(
                                 Icons.delete,
                                 size: 37,
-                                color: Colors.black26,
+                                color: Colors.redAccent,
                               ),
                               onTap: () async {
                                 // //TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Item
@@ -179,13 +199,26 @@ class HomeState extends State<Home> {
                 ),
               ),
               Container(
+                child: Image.asset(
+                  'images/2.jpg',
+                  height: 100,
+                  width: 150,
+                ),
                 margin:
                     EdgeInsets.only(left: 20, top: 20, bottom: 20, right: 20),
-                width: 140,
-                height: 155,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.blue[100]),
+                // width: 150,
+                // height: 160,
+                // decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(20),
+                //     boxShadow: [
+                //       BoxShadow(
+                //         color: Colors.grey.withOpacity(0.2),
+                //         spreadRadius: 2,
+                //         blurRadius: 3,
+                //         offset: Offset(0, 0), // changes position of shadow
+                //       ),
+                //     ],
+                //     color: Colors.white),
               ),
             ],
           ),

@@ -28,6 +28,13 @@ name TEXT,
 price INTEGER,
 )
 ''');
+    await db.execute('''
+CREATE TABLE login (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+password INTEGER,
+)
+''');
   }
 
 //select databases
